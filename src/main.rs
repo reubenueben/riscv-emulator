@@ -46,7 +46,7 @@ impl Cpu {
             0x13 => {
                 // addi
 
-                let imm = ((inst & 0xff00000) as i32 as i64 >> 20) as u64; // converts 12 bit signed value
+                let imm = ((inst & 0xfff00000) as i32 as i64 >> 20) as u64; // converts 12 bit signed value
                 // to 64 bit
                 self.regs[rd] = self.regs[rs1].wrapping_add(imm);
             }
