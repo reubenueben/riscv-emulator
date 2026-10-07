@@ -13,6 +13,12 @@ struct Cpu {
 impl Cpu {
     const DRAM_SIZE: u64 = 1024 * 1024 * 1;
 
+    fn dump_registers(&self) {
+        for (i, r) in self.regs.iter().enumerate() {
+            println!("x{:<2} = {:#018x}", i, r);
+        }
+    }
+
     fn new(code: Vec<u8>) -> Self {
         let mut regs = [0; 32];
         regs[2] = code.len() as u64;
@@ -72,7 +78,6 @@ fn main() -> io::Result<()> {
         cpu.pc += 4;
         cpu.execute(inst);
     }
-
+    cpu.dump_registers();
     Ok(())
 }
-
