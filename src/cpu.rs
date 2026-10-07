@@ -11,7 +11,7 @@ impl Cpu {
         }
     }
 
-    pub fn new(code: Vec<u8>) -> Self {
+    pub fn new(code: Vec<u8>) -> Cpu {
         let mut regs = [0; 32];
         regs[2] = code.len() as u64;
         Self { regs, pc: 0, code }
