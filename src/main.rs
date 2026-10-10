@@ -20,10 +20,22 @@ fn main() -> io::Result<()> {
 
     let mut cpu = Cpu::new(code);
 
-    while cpu.pc < cpu.code.len() as u64 {
-        let inst = cpu.fetch();
+    loop {
+        let inst = match cpu.fetch() {
+            Ok(inst) => inst,
+            Err(_) => break,
+        };
+
         cpu.pc += 4;
-        cpu.execute(inst);
+
+        match cpu.execute(inst) {
+            Ok(_) => {}
+            Err(_) => break,
+        };
+
+        if cpu.pc == 0 {
+            break;
+        }
     }
     cpu.dump_registers();
     Ok(())
