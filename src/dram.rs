@@ -36,7 +36,7 @@ impl Dram {
 
     fn load8(&self, addr: u64) -> u64 {
         let index = (addr - DRAM_BASE) as usize;
-        (self.dram[index] as u64)
+        self.dram[index] as u64 
     }
 
     fn load16(&self, addr: u64) -> u64 {
